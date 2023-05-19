@@ -42,7 +42,6 @@ if st.button("Check Status"):
         response = requests.get(status_endpoint, params=params)
         if response.status_code == 200:
             data = response.json()
-
             # Display response on frontend
             st.subheader("Short Summary")
             st.write(data["message"][0]["short_summary"])
@@ -51,11 +50,16 @@ if st.button("Check Status"):
             st.write(data["message"][0]["long_summary"])
 
             st.subheader("Tweet")
-            st.write(data["message"][0]["tweet"])
+            tweets = data["message"][0]["tweet"].split("/")
+            for i in range(len(tweets)):
+                st.write(tweets[i], key=str(i))
 
             st.subheader("Post")
-            st.write(data["message"][0]["post"])
+            posts = data["message"][0]["post"].split("/")
+            for i in range(len(posts)):
+                st.write(posts[i])
         else:
+            st.write(response)
             st.error("Either the book is still being analyzed or you have not started the task")
     else:
         st.warning("Please enter a token number.")
