@@ -34,7 +34,7 @@ token1 = st.text_input("Enter Token Number", key='token_input')
 
 # Check Status Button
 if st.button("Check Status"):
-    if token:
+    if token1:
         # Prepare data for GET request
         params = {"token": token1}
 
