@@ -59,7 +59,6 @@ if st.button("Check Status"):
             for i in range(len(posts)):
                 st.write(posts[i])
         else:
-            st.write(response)
             st.error("Either the book is still being analyzed or you have not started the task")
     else:
         st.warning("Please enter a token number.")
