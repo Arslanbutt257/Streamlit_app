@@ -11,20 +11,19 @@ st.title("Book Analyzer")
 # Book Upload Section
 uploaded_file = st.file_uploader("Upload Book File")
 
-# Token Input Section
-token = st.text_input("Enter Token Number")
-
 # Book Upload Button
 if st.button("Analyze Book"):
-    if uploaded_file is not None and token:
+    if uploaded_file is not None:
         # Prepare data for POST request
         files = {"file": uploaded_file}
-        data = {"token": token}
 
         # Make POST request
-        response = requests.post(upload_endpoint, files=files, data=data)
+        response = requests.post(upload_endpoint, files=files)
         if response.status_code == 200:
+            data = response.json()
             st.success("Book uploaded successfully!")
+            st.write("Use below token to check status")
+            st.write(data['token'])
         else:
             st.error("Failed to upload book. Please try again.")
 
